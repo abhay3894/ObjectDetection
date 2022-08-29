@@ -28,17 +28,7 @@ while True:
     bbox = list(bbox)
     confs = list(confs.reshape(1,-1)[0])
     confs = list(map(float,confs))
-
     indices = cv2.dnn.NMSBoxes(bbox, confs, thres, nms_threshold)
-
-    # for i in indices:
-    #     i = i[0]
-    #     box = bbox[i]
-    #     x,y,w,h = box[0],box[1],box[2],box[3]
-    #     cv2.rectangle(img, (x,y), (x + w, y + h), color = (0,255,0), thickness = 2)
-    #     cv2.putText(img, classNames[classIds[i][0] - 1].upper(), (box[0] + 10, box[1] + 30),
-    #                 cv2.FONT_ITALIC, 2, (0, 0, 255))
-
     if len(classIds) != 0:
         for classId, confidence, box in zip(classIds.flatten(), confs, bbox):
             cv2.rectangle(img, box, color = (0,255,0), thickness = 2)
